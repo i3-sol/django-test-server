@@ -20,7 +20,9 @@ def note(request):
         serializer = NoteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
+            note = Notes.objects.all()
+            _serializer = NoteSerializer(note, many=True)
+            return Response(data=_serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["DELETE"])
@@ -34,4 +36,3 @@ def note_detail(request, pk):
         note.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    
