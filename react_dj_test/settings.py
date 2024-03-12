@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'corsheaders',
+    'rest_framework_simplejwt',
     'rest_framework',
-    'corsheaders'
+    'django_filters',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'react_dj_test.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
 TEMPLATES = [
     {
